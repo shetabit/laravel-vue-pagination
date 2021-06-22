@@ -5,6 +5,7 @@
         :show-disabled="showDisabled"
         :size="size"
         :align="align"
+        :router="router"
         v-on:pagination-change-page="onPaginationChangePage">
 
         <ul class="pagination"
@@ -15,10 +16,11 @@
                 'justify-content-end': align == 'right'
             }"
             v-if="computed.total > computed.perPage"
-            slot-scope="{ data, limit, showDisabled, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
+            slot-scope="{ data, limit, showDisabled, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents, makePath }">
 
             <li class="page-item pagination-prev-nav" :class="{'disabled': !computed.prevPageUrl}" v-if="computed.prevPageUrl || showDisabled">
-                <a class="page-link" href="#" aria-label="Previous" :tabindex="!computed.prevPageUrl && -1" v-on="prevButtonEvents">
+                <a class="page-link" :href="$route ? makePath($route.path, { ...$route.query, page: computed.currentPage - 1}) : '#'"
+                   aria-label="Previous" :tabindex="!computed.prevPageUrl && -1" v-on="prevButtonEvents">
                     <slot name="prev-nav">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
@@ -27,14 +29,20 @@
             </li>
 
             <li class="page-item pagination-page-nav" v-for="(page, key) in computed.pageRange" :key="key" :class="{ 'active': page == computed.currentPage }">
-                <a class="page-link" href="#" v-on="pageButtonEvents(page)">
-                    {{ page }}
-                    <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
-                </a>
+                <slot name="page" v-bind:page="page"
+                      v-bind:isCurrentPage="page == computed.currentPage"
+                      v-bind:href="$route ? makePath($route.path, { ...$route.query, page}) : '#'"
+                      v-bind:pageButtonEvents="pageButtonEvents">
+                    <a class="page-link" :href="$route ? makePath($route.path, { ...$route.query, page}) : '#'" v-on="pageButtonEvents(page)">
+                        {{ page }}
+                        <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
+                    </a>
+                </slot>
             </li>
 
             <li class="page-item pagination-next-nav" :class="{'disabled': !computed.nextPageUrl}" v-if="computed.nextPageUrl || showDisabled">
-                <a class="page-link" href="#" aria-label="Next" :tabindex="!computed.nextPageUrl && -1" v-on="nextButtonEvents">
+                <a class="page-link" :href="$route ? makePath($route.path, { ...$route.query, page: computed.currentPage + 1}) : '#'"
+                   aria-label="Next" :tabindex="!computed.nextPageUrl && -1" v-on="nextButtonEvents">
                     <slot name="next-nav">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
@@ -77,6 +85,10 @@ export default {
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
             }
+        },
+        router: {
+            type: Boolean,
+            default: false
         }
     },
 

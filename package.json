@@ -3,7 +3,7 @@
   "version": "2.3.2",
   "description": "Vue.js pagination component for Laravel paginators and Bootstrap styles",
   "author": "Gilbert Pellegrom <gilbert@pellegrom.me>",
-  "homepage": "https://github.com/gilbitron/laravel-vue-pagination",
+  "homepage": "https://github.com/shetabit/laravel-vue-pagination.git",
   "license": "MIT",
   "keywords": [
     "vue",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gilbitron/laravel-vue-pagination.git"
+    "url": "https://github.com/shetabit/laravel-vue-pagination.git"
   },
   "main": "dist/laravel-vue-pagination.common.js",
   "scripts": {
@@ -40,5 +40,8 @@
     "eslint-plugin-vue": "^5.2.2",
     "vue": "^2.6.7",
     "vue-template-compiler": "^2.6.7"
+  },
+  "dependencies": {
+    "vue-router": "^3.5.2"
   }
 }

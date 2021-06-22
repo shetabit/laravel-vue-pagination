@@ -3,7 +3,8 @@ export default {
     props: {
         data: {
             type: Object,
-            default: () => {}
+            default: () => {
+            }
         },
         limit: {
             type: Number,
@@ -26,6 +27,10 @@ export default {
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
             }
+        },
+        router: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -72,16 +77,16 @@ export default {
                 return this.lastPage;
             }
 
-            var current = this.currentPage;
-            var last = this.lastPage;
-            var delta = this.limit;
-            var left = current - delta;
-            var right = current + delta + 1;
-            var range = [];
-            var pages = [];
-            var l;
+            let current = this.currentPage;
+            let last = this.lastPage;
+            let delta = this.limit;
+            let left = current - delta;
+            let right = current + delta + 1;
+            let range = [];
+            let pages = [];
+            let l;
 
-            for (var i = 1; i <= last; i++) {
+            for (let i = 1; i <= last; i++) {
                 if (i === 1 || i === last || (i >= left && i < right)) {
                     range.push(i);
                 }
@@ -114,8 +119,22 @@ export default {
             if (page === '...') {
                 return;
             }
+            if (this.router) {
+                this.$router.push(this.makePath(this.$route.path, { ...this.$route.query, page: page }))
+            }
 
             this.$emit('pagination-change-page', page);
+        },
+        makePath (path, queries) {
+            if (isNaN(queries.page)) {
+                return '#'
+            }
+            let qS = '?';
+            for (let [index, value] of Object.entries(queries)) {
+                qS += index + '=' + value + '&';
+            }
+            qS = qS.slice(0, qS.length - 1)
+            return path + qS;
         }
     },
 
@@ -157,7 +176,8 @@ export default {
                     e.preventDefault();
                     this.selectPage(page);
                 }
-            })
+            }),
+            makePath: this.makePath
         });
     }
 }

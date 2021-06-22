@@ -46,7 +46,18 @@
                         :limit="limit"
                         :show-disabled="showDisabled"
                         :size="size"
-                        :align="align" />
+                        :router="true"
+                        :align="align">
+                        <span slot="prev-nav">&lt; Previous</span>
+                        <span slot="next-nav">Next &gt;</span>
+                        <template v-slot:page="{href, page, isCurrentPage, pageButtonEvents}">
+                            <a class="page-link" :href="href" v-on="pageButtonEvents(page)">
+                                {{ page }}
+                                <span class="sr-only" v-if="isCurrentPage">(current)</span>
+                            </a>
+                        </template>
+
+                    </pagination>
 
                     <!--pagination
                         :data="laravelResourceData"

@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/gilbitron/laravel-vue-pagination.svg?branch=master)](https://travis-ci.org/gilbitron/laravel-vue-pagination) [![npm](https://img.shields.io/npm/v/laravel-vue-pagination.svg)](https://www.npmjs.com/package/laravel-vue-pagination) [![Downloads](https://img.shields.io/npm/dt/laravel-vue-pagination.svg)](https://www.npmjs.com/package/laravel-vue-pagination)
-
-> Want your logo here? [Sponsor me on GitHub](https://github.com/users/gilbitron/sponsorship)
+##Note
+This is a fork from [Laravel vue pagination](https://github.com/gilbitron/laravel-vue-pagination) with support of router-link.
+It also adds links to buttons so that the user can open the page in a new tab and crawlers index other pages.
 
 # Laravel Vue Pagination
 A Vue.js pagination component for Laravel paginators that works with Bootstrap.
@@ -79,7 +79,15 @@ Prev/Next buttons can be customized using the `prev-nav` and `next-nav` slots:
 	<span slot="next-nav">Next &gt;</span>
 </pagination>
 ```
-
+### Customizing Page Buttons
+```html
+<template v-slot:page="{href, page, isCurrentPage, pageButtonEvents}">
+    <a class="page-link" :href="href" v-on="pageButtonEvents(page)">
+        {{ page }}
+        <span class="sr-only" v-if="isCurrentPage">(current)</span>
+    </a>
+</template>
+```
 ## API
 
 ### Props
@@ -91,6 +99,7 @@ Prev/Next buttons can be customized using the `prev-nav` and `next-nav` slots:
 | `show-disabled` | Boolean | (optional) Show disabled prev/next buttons instead of hiding them. `false` hides disabled buttons (default). `true` shows disables buttons. |
 | `size` | String | (optional) One of `small`, `default` or `large` |
 | `align` | String | (optional) One of `left` (default), `center` or `right` |
+| `router` | Boolean | (optional) If true clicking pages will change the route |
 
 ### Events
 
