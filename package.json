@@ -1,6 +1,6 @@
 {
   "name": "shetabit-laravel-vue-pagination",
-  "version": "2.3.2",
+  "version": "2.3.7",
   "description": "Vue.js pagination component for Laravel paginators and Bootstrap styles",
   "author": "Gilbert Pellegrom <gilbert@pellegrom.me>",
   "homepage": "https://github.com/shetabit/laravel-vue-pagination.git",
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/shetabit/laravel-vue-pagination.git"
   },
-  "main": "dist/laravel-vue-pagination.common.js",
+  "main": "src/LaravelVuePagination.vue",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build --target lib src/LaravelVuePagination.vue",
@@ -39,9 +39,8 @@
     "eslint": "^5.14.1",
     "eslint-plugin-vue": "^5.2.2",
     "vue": "^2.6.7",
-    "vue-template-compiler": "^2.6.7"
-  },
-  "dependencies": {
+    "vue-template-compiler": "^2.6.7",
     "vue-router": "^3.5.2"
+
   }
 }

@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["laravel-vue-pagination"] = factory();
+		exports["shetabit-laravel-vue-pagination"] = factory();
 	else
-		root["laravel-vue-pagination"] = factory();
+		root["shetabit-laravel-vue-pagination"] = factory();
 })((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -656,4 +656,4 @@ var LaravelVuePagination_component = normalizeComponent(
 
 /******/ })["default"];
 });
-//# sourceMappingURL=laravel-vue-pagination.umd.js.map
+//# sourceMappingURL=shetabit-laravel-vue-pagination.umd.js.map
