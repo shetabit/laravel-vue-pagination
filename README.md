@@ -1,4 +1,4 @@
-##Note
+## Note
 This is a fork from [Laravel vue pagination](https://github.com/gilbitron/laravel-vue-pagination) with support of router-link.
 It also adds links to buttons so that the user can open the page in a new tab and crawlers index other pages.
 
